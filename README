@@ -1,1 +1,50 @@
-Описание модуля session-user
+Модуль предназначен для поддержки пользовательских атрибутов в сессии.
+
+
+*Возможности*
+
+Для одного пользователя (даже если он использует разные браузеры или находится 
+территориально в различных местах) будет использована одна и та же сессия.  
+
+Хранание идентификатора пользователя в таблице сессий, такм образом поиск
+сессии по идентификатору пользователя теперь стал возможен.
+
+
+*Зависимости*
+
+Использует стандартный модуль database в ko3
+
+
+*Установка*
+
+1. В application/bootstrap.php добавьте строку для использования данного менеджера 
+сессий:
+Kohana_Session::$default = 'user';
+
+2. В application/bootstrap.php массиве инициализации модулей добавить строку:
+		'session-user'	=> PATH_TO_MODULE . 'session-user',   // Пользовательские сессии
+
+
+Как должен выглядеть ваш bootstarp.php после модификации:
+
+Kohana_Session::$default = 'user';
+
+/**
+ * Enable modules. Modules are referenced by a relative or absolute path.
+ */
+Kohana::modules(array(
+		// System modules
+		'database'	=> $kohana_installation . 'modules/database',   // Database access
+
+		// 3rd party modules
+		'session-user'	=> PATH_TO_MODULE . 'session-user',   // Пользовательские сессии
+	));
+
+
+*Использование*
+
+$sess = Session::instance()->session_load($user);
+
+где $user объект имплементирующий интерфейс Interface_User с единственным методом
+get_pk() возвращающий идентификатор пользователя.
+ 

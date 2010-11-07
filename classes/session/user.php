@@ -62,7 +62,7 @@ class Session_User extends Session_Database
 	 * @param $force
 	 * @param $merge
 	 */
-	public function load_session($user, $force = FALSE, $merge = FALSE)
+	public function session_load($user, $force = FALSE, $merge = FALSE)
 	{
 		if ( $user instanceof Interface_User)
 		{
@@ -80,6 +80,8 @@ class Session_User extends Session_Database
 					$this->_data = arr::merge($data, $this->_data);
 			}
 		}
+		
+		return $this;
 	}
 	
 	/**

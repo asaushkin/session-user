@@ -40,6 +40,15 @@ Kohana::modules(array(
 		'session-user'	=> PATH_TO_MODULE . 'session-user',   // Пользовательские сессии
 	));
 
+3. Модифицируйте таблицу sessions для поддержки иденификатора пользователя
+(пример дан для mysql)
+
+alter table `sessions` 
+	add `user_id` integer unsigned, 
+	add unique `uniq_sess_user_id` (`user_id`);
+
+Опционально можете добавить внешний ключ на таблицу пользователей для поддержания
+целостности базы данных.
 
 *Использование*
 

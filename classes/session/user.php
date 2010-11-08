@@ -107,6 +107,9 @@ class Session_User extends Session_Database
 		
 		if ($result->count() == 1)
 		{
+			// TODO: Delete current *anonymouse* session. Don't delete if session
+			// already have user owner. 
+			
 			$this->read($result->get('session_id'));
 			return TRUE;
 		}
@@ -142,7 +145,6 @@ class Session_User extends Session_Database
 			
 		return TRUE;
 	}
-
 }
 
 ?>
